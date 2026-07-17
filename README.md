@@ -1,1 +1,3 @@
-# TOP_Calculator
+# TheOdinProject Calculator
+
+A mini final project for TOP's Foundation Course
