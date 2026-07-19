@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1b1b1d;
+    height: 100vh;
+}
+
+.calculator {
+    width: 300px;
+    background-color: #000000;
+    padding: 20px;
+    border: 5px;
+    border-radius: 10px;
+}
+
+.display {
+    text-align: right;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 -2px 0 #1b1b1d;
+}
+
+.display .past {
+    min-height: 20px;
+}
+
+.display .main {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+.all-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+}
+
+.all-buttons > div {
+    display: contents;  
+}
+
+.all-buttons button {
+    padding: 15px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Number buttons: #333333 with white text */
+.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .dot {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+/* Operator buttons: #FF9F0A with white text */
+.divide, .multiply, .sub, .add {
+    background-color: #FF9F0A;
+    color: #ffffff;
+}
+
+.equal {
+    background-color: #FF9F0A;
+    color: #ffffff;
+    grid-column: span 2;
+    border-radius: 5px;
+}
+
+/* Special modifiers: #A5A5A5 with black text */
+.AC, .C, .modulo {
+    background-color: #A5A5A5;
+    color: #000000;
+}
