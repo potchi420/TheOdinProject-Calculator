@@ -57,8 +57,8 @@ clearButton.addEventListener('click', () => {
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (shouldResetDisplay) {
-            currentDisplay.textContent = '';
-            shouldResetDisplay = false;
+            currentDisplay.textContent += button.textContent;
+            return;
         }
         if (currentDisplay.textContent === '0') {
             currentDisplay.textContent = '';
@@ -71,7 +71,15 @@ operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
         firstNumber = currentDisplay.textContent;
         operator = button.textContent;
-        previousDisplay.textContent = `${firstNumber} ${operator}`;
+        currentDisplay.textContent = `${firstNumber}${operator}`;
         shouldResetDisplay = true;
     });
+});
+
+equalsButton.addEventListener('click', () => {
+    const parts = currentDisplay.textContent.split(operator);
+    secondNumber = parts[1];
+    const result = operate(Number(firstNumber), Number(secondNumber), operator);
+    currentDisplay.textContent = result;
+    shouldResetDisplay = true;
 });
