@@ -49,13 +49,11 @@ body {
     border-radius: 5px;
 }
 
-/* Number buttons: #333333 with white text */
 .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .dot {
     background-color: #333333;
     color: #ffffff;
 }
 
-/* Operator buttons: #FF9F0A with white text */
 .divide, .multiply, .sub, .add {
     background-color: #FF9F0A;
     color: #ffffff;
@@ -68,7 +66,6 @@ body {
     border-radius: 5px;
 }
 
-/* Special modifiers: #A5A5A5 with black text */
 .AC, .C, .modulo {
     background-color: #A5A5A5;
     color: #000000;

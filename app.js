@@ -14,3 +14,64 @@ let firstNumber = '';
 let operator = '';
 let secondNumber = '';
 let shouldResetDisplay = false;
+
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    return a / b;
+}
+
+function operate(a, b, op) {
+    switch (op) {
+        case '+':
+            return add(a, b);
+        case '−':
+            return subtract(a, b);
+        case '×':
+            return multiply(a, b);
+        case '÷':
+            return divide(a, b);
+        default:
+            return 0;
+    }
+}
+
+clearButton.addEventListener('click', () => {
+    firstNumber = '';
+    operator = '';
+    secondNumber = '';
+    currentDisplay.textContent = '0';
+    previousDisplay.textContent = '';
+});
+
+numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (shouldResetDisplay) {
+            currentDisplay.textContent = '';
+            shouldResetDisplay = false;
+        }
+        if (currentDisplay.textContent === '0') {
+            currentDisplay.textContent = '';
+        }
+        currentDisplay.textContent += button.textContent;
+    })
+});
+
+operatorButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        firstNumber = currentDisplay.textContent;
+        operator = button.textContent;
+        previousDisplay.textContent = `${firstNumber} ${operator}`;
+        shouldResetDisplay = true;
+    });
+});
