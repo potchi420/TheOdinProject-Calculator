@@ -69,9 +69,17 @@ decimalButton.addEventListener('click', () => {
         shouldResetDisplay = false;
         return;
     }
-    if (!currentDisplay.textContent.includes('.')) {
+    // Get the current number (after any operator)
+    let currentNumber = currentDisplay.textContent;
+    if (currentNumber.includes('+') || currentNumber.includes('−') || currentNumber.includes('×') || currentNumber.includes('÷')) {
+        const parts = currentDisplay.textContent.split(operator);
+        currentNumber = parts[1] || '';
+    }
+    if (!currentNumber.includes('.')) {
         currentDisplay.textContent += '.';
     }
+        
+    
 });
 
 numberButtons.forEach(button => {
