@@ -7,6 +7,7 @@ const numberButtons = document.querySelectorAll('.one, .two, .three, .four, .fiv
 const operatorButtons = document.querySelectorAll('.divide, .multiply, .sub, .add');
 const equalsButton = document.querySelector('.equal');
 const clearButton = document.querySelector('.AC');
+const deleteButton = document.querySelector('.del');
 const decimalButton = document.querySelector('.dot');
 
 // State
@@ -49,23 +50,39 @@ function operate(a, b, op) {
 clearButton.addEventListener('click', () => {
     firstNumber = '';
     operator = '';
-    secondNumber = '';
+    secondNumber = '';  
     currentDisplay.textContent = '0';
     previousDisplay.textContent = '';
+    shouldResetDisplay = false;
+});
+
+deleteButton.addEventListener('click', () => {
+    currentDisplay.textContent = currentDisplay.textContent.slice(0, -1) || '0';
 });
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (shouldResetDisplay) {
-            currentDisplay.textContent += button.textContent;
+            const hasOperator = currentDisplay.textContent.includes('+') || 
+                                currentDisplay.textContent.includes('−') || 
+                                currentDisplay.textContent.includes('×') || 
+                                currentDisplay.textContent.includes('÷');
+            
+            if (hasOperator) {
+                currentDisplay.textContent += button.textContent;
+            } else {
+                currentDisplay.textContent = button.textContent;
+            }
+            shouldResetDisplay = false;
             return;
         }
         if (currentDisplay.textContent === '0') {
             currentDisplay.textContent = '';
         }
         currentDisplay.textContent += button.textContent;
-    })
+    });
 });
+
 
 operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
