@@ -63,6 +63,17 @@ deleteButton.addEventListener('click', () => {
     currentDisplay.textContent = currentDisplay.textContent.slice(0, -1) || '0';
 });
 
+decimalButton.addEventListener('click', () => {
+    if (shouldResetDisplay) {
+        currentDisplay.textContent = '0.';
+        shouldResetDisplay = false;
+        return;
+    }
+    if (!currentDisplay.textContent.includes('.')) {
+        currentDisplay.textContent += '.';
+    }
+});
+
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (shouldResetDisplay) {
@@ -95,7 +106,14 @@ operatorButtons.forEach(button => {
             currentDisplay.textContent.includes('÷')) {
             const parts = currentDisplay.textContent.split(operator);
             firstNumber = operate(Number(parts[0]), Number(parts[1]), operator);
-        } else {
+        }
+        else if (currentDisplay.textContent === 'are u dumb?') {
+            currentDisplay.textContent = '0';
+            firstNumber = '';
+            operator = '';
+            shouldResetDisplay = false;
+        }
+        else {
             firstNumber = currentDisplay.textContent;
         }
         
@@ -107,6 +125,12 @@ operatorButtons.forEach(button => {
 
 
 equalsButton.addEventListener('click', () => {
+    if (currentDisplay.textContent === 'are u dumb?') {
+        currentDisplay.textContent = '0';
+        firstNumber = '';
+        operator = '';
+        shouldResetDisplay = false;
+    }   
     const parts = currentDisplay.textContent.split(operator);
     secondNumber = parts[1];
     const result = operate(Number(firstNumber), Number(secondNumber), operator);
