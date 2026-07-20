@@ -86,12 +86,22 @@ numberButtons.forEach(button => {
 
 operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
-        firstNumber = currentDisplay.textContent;
+        if (currentDisplay.textContent.includes('+') || 
+            currentDisplay.textContent.includes('−') || 
+            currentDisplay.textContent.includes('×') || 
+            currentDisplay.textContent.includes('÷')) {
+            const parts = currentDisplay.textContent.split(operator);
+            firstNumber = operate(Number(parts[0]), Number(parts[1]), operator);
+        } else {
+            firstNumber = currentDisplay.textContent;
+        }
+        
         operator = button.textContent;
         currentDisplay.textContent = `${firstNumber}${operator}`;
         shouldResetDisplay = true;
     });
 });
+
 
 equalsButton.addEventListener('click', () => {
     const parts = currentDisplay.textContent.split(operator);
