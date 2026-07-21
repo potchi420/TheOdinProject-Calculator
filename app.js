@@ -132,16 +132,55 @@ operatorButtons.forEach(button => {
 });
 
 
+document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if (key >= '0' && key <= '9') {
+        document.querySelector(`.${key === '0' ? 'zero' : ['one','two','three','four','five','six','seven','eight','nine'][parseInt(key) - 1]}`)?.click();
+    } else if (key === '.') {
+        document.querySelector('.dot')?.click();
+    } else if (key === 'Enter' || key === '=') {
+        e.preventDefault();
+        document.querySelector('.equal')?.click();
+    } else if (key === 'Backspace') {
+        document.querySelector('.del')?.click();
+    } else if (key === 'Escape' || key === 'c') {
+        document.querySelector('.AC')?.click();
+    } else if (key === '+') {
+        document.querySelector('.add')?.click();
+    } else if (key === '-') {
+        document.querySelector('.sub')?.click();
+    } else if (key === '*') {
+        document.querySelector('.multiply')?.click();
+    } else if (key === '/') {
+        e.preventDefault();
+        document.querySelector('.divide')?.click();
+    } else if (key === '%') {
+        document.querySelector('.modulo')?.click();
+    }
+});
+
+function roundResult(num) {
+    if (typeof num !== 'number') return num;
+    if (Number.isInteger(num)) return num;
+    return parseFloat(num.toFixed(10)); 
+}
+
 equalsButton.addEventListener('click', () => {
     if (currentDisplay.textContent === 'are u dumb?') {
         currentDisplay.textContent = '0';
         firstNumber = '';
         operator = '';
         shouldResetDisplay = false;
-    }   
+        return;
+    }
+    if (!operator) return;
+    
+    // After a result is showing, pressing = again should do nothing
     const parts = currentDisplay.textContent.split(operator);
-    secondNumber = parts[1];
+    if (parts.length < 2) return;
+    
+    secondNumber = parts[1] || '';
     const result = operate(Number(firstNumber), Number(secondNumber), operator);
-    currentDisplay.textContent = result;
+    currentDisplay.textContent = roundResult(result);
     shouldResetDisplay = true;
 });
